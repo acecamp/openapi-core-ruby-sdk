@@ -44,6 +44,10 @@ module AliyunSDKCore
 
       response      = connection.send(method.downcase, uri) do |request|
         request.headers['User-Agent'] = DEFAULT_UA
+        request.options.timeout      = options[:timeout]      if options[:timeout]
+        request.options.open_timeout = options[:open_timeout] if options[:open_timeout]
+        request.options.read_timeout = options[:read_timeout] if options[:read_timeout]
+        request.options.write_timeout = options[:write_timeout] if options[:write_timeout]
         if opts[:method] == 'POST'
           request.headers['Content-Type'] = 'application/x-www-form-urlencoded'
           request.body                    = querystring
